@@ -16,6 +16,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let descriptions = ["A quiz about how good you are at math.", "A quiz about how well you know the super heroes of Marvel.", "A quiz about how good you are at science."];
     let cellIdentifier = "tableCell";
     @IBOutlet weak var settingsBtn: UIBarButtonItem!
+    @IBOutlet var listView: UIView!
+    @IBOutlet var mathView: UIView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let row = indexPath.row
+        let mathViewController = self.storyboard!.instantiateViewControllerWithIdentifier("math-question1") 
+        let marvelViewController = self.storyboard!.instantiateViewControllerWithIdentifier("marvel-question1") 
+        let scienceViewController = self.storyboard!.instantiateViewControllerWithIdentifier("science-question1")
+        
+        if (row == 0) {
+            self.presentViewController(mathViewController, animated: true, completion: { () -> Void in
+                
+            })
+            //self.navigationController?.pushViewController(mathViewController, animated: true)
+        } else if(row == 1) {
+            self.presentViewController(marvelViewController, animated: true, completion: { () -> Void in
+                
+            })
+            //self.navigationController?.pushViewController(marvelViewController, animated: true)
+        } else {
+            self.presentViewController(scienceViewController, animated: true, completion: { () -> Void in
+                
+            })
+            //self.navigationController?.pushViewController(scienceViewController, animated: true)
+        }
+        
         
     }
     
