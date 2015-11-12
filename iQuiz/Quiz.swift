@@ -27,7 +27,7 @@ class Quiz {
         self.questionNumber = 0;
     }
     
-    func presetQuestion() -> String {
+    func presentQuestion() -> String {
         return questions[questionNumber];
     }
     

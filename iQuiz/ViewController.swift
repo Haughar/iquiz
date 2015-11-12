@@ -19,15 +19,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var quizSelected : String!;
     let mathQs : [String] = ["Math Question 1", "Math Question 2", "Math Question 3"];
     let mathAs : [String] = ["A", "C", "D"];
-    let mathFillers : [[String]] = [["B", "C", "D"], ["A", "B", "D"], ["A", "B", "C"]];
+    let mathFillers : [[String]] = [["A", "B", "C", "D"], ["A", "B", "C", "D"], ["A", "B", "C", "D"]];
     
     let marvelQs : [String] = ["Marvel Question 1", "Marvel Question 2", "Marvel Question 3"];
     let marvelAs : [String] = ["C", "D", "A"];
-    let marvelFillers : [[String]] = [["A", "B", "D"], ["A", "B", "C"], ["B", "C", "D"]];
+    let marvelFillers : [[String]] = [["A", "B", "C", "D"], ["A", "B", "C", "D"], ["A", "B", "C", "D"]];
     
     let scienceQs : [String] = ["Science Question 1", "Science Question 2", "Science Question 3"];
     let scienceAs : [String] = ["B", "A", "B"];
-    let scienceFillers : [[String]] = [["A", "C", "D"], ["C", "B", "D"], ["D", "B", "C"]];
+    let scienceFillers : [[String]] = [["A", "B", "C", "D"], ["A", "B", "C", "D"], ["A", "B", "C", "D"]];
     
     
     override func viewDidLoad() {

@@ -21,8 +21,8 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var submit: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        quizLabel.text = quiz.presetQuestion();
+        super.viewDidLoad();
+        quizLabel.text = quiz.presentQuestion();
         let options = quiz.getChoices();
         showOptions(options);
         
@@ -47,7 +47,6 @@ class QuestionViewController: UIViewController {
     
     @IBAction func chooseAnswer(sender: UIButton) {
         chosenAnswer = sender.titleLabel!.text;
-        print("Chose an answer");
     }
     
     @IBAction func submitAnswer(sender: UIButton) {
