@@ -15,10 +15,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let quizzes = ["Math", "Marvel", "Science"];
     let descriptions = ["A quiz about how good you are at math.", "A quiz about how well you know the super heroes of Marvel.", "A quiz about how good you are at science."];
     let cellIdentifier = "tableCell";
-    @IBOutlet weak var settingsBtn: UIBarButtonItem!
-    @IBOutlet var listView: UIView!
-    @IBOutlet var mathView: UIView!
+    @IBOutlet weak var settingsBtn: UIBarButtonItem!;
+    var quizSelected : String!;
+    let mathQs : [String] = ["Math Question 1", "Math Question 2", "Math Question 3"];
+    let mathAs : [String] = ["A", "C", "D"];
+    let mathFillers : [[String]] = [["B", "C", "D"], ["A", "B", "D"], ["A", "B", "C"]];
     
+    let marvelQs : [String] = ["Marvel Question 1", "Marvel Question 2", "Marvel Question 3"];
+    let marvelAs : [String] = ["C", "D", "A"];
+    let marvelFillers : [[String]] = [["A", "B", "D"], ["A", "B", "C"], ["B", "C", "D"]];
+    
+    let scienceQs : [String] = ["Science Question 1", "Science Question 2", "Science Question 3"];
+    let scienceAs : [String] = ["B", "A", "B"];
+    let scienceFillers : [[String]] = [["A", "C", "D"], ["C", "B", "D"], ["D", "B", "C"]];
     
     
     override func viewDidLoad() {
@@ -33,6 +42,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "segueToQuestion") {
+            let questionVC = segue.destinationViewController as! QuestionViewController;
+            if (self.quizSelected == "Math") {
+                questionVC.quiz = Quiz(questions: self.mathQs, answers: self.mathAs, fillers: self.mathFillers);
+            } else if (self.quizSelected == "Marvel") {
+                questionVC.quiz = Quiz(questions: self.marvelQs, answers: self.marvelAs, fillers: self.marvelFillers);
+            } else {
+                questionVC.quiz = Quiz(questions: self.scienceQs, answers: self.scienceAs, fillers: self.scienceFillers);
+            }
+            
+        }
+        
+    }
+    
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.quizzes.count;
     }
@@ -40,40 +65,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        let row = indexPath.row
-        let mathViewController = self.storyboard!.instantiateViewControllerWithIdentifier("math-question1") 
-        let marvelViewController = self.storyboard!.instantiateViewControllerWithIdentifier("marvel-question1") 
-        let scienceViewController = self.storyboard!.instantiateViewControllerWithIdentifier("science-question1")
-        
-        if (row == 0) {
-            self.presentViewController(mathViewController, animated: true, completion: { () -> Void in
-                
-            })
-            //self.navigationController?.pushViewController(mathViewController, animated: true)
-        } else if(row == 1) {
-            self.presentViewController(marvelViewController, animated: true, completion: { () -> Void in
-                
-            })
-            //self.navigationController?.pushViewController(marvelViewController, animated: true)
-        } else {
-            self.presentViewController(scienceViewController, animated: true, completion: { () -> Void in
-                
-            })
-            //self.navigationController?.pushViewController(scienceViewController, animated: true)
-        }
-        
+        self.quizSelected = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text;
+        self.performSegueWithIdentifier("segueToQuestion", sender: self);
         
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!;
         
-        cell.textLabel?.text = quizzes[indexPath.row];
-        cell.imageView!.image = UIImage(named : quizzes[indexPath.row]);
-        cell.detailTextLabel?.text = descriptions[indexPath.row];
+        cell.textLabel?.text = self.quizzes[indexPath.row];
+        cell.imageView!.image = UIImage(named : self.quizzes[indexPath.row]);
+        cell.detailTextLabel?.text = self.descriptions[indexPath.row];
         
-        return cell
+        return cell;
     }
     
     func settingsAlert(sender: UIBarButtonItem) {
