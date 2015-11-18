@@ -33,6 +33,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        // put call to method that does http request here)
+        let url = NSURL(string: "http://tednewardsandbox.site44.com/questions.json")!
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) -> Void in
+            
+            if let urlContent = data {
+                // when task does return data
+                print(urlContent)
+                
+            } else {
+                
+                // When task does not return a data
+                
+            }
+            
+        }
+        task.resume()
+            
+        
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier);
         settingsBtn.action = "settingsAlert:";
     }
@@ -90,6 +108,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
     }
-    
     
 }
