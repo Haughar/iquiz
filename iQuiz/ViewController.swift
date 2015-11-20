@@ -34,25 +34,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // put call to method that does http request here)
-        let url = NSURL(string: "http://tednewardsandbox.site44.com/questions.json")!
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) -> Void in
-            
-            if let urlContent = data {
-                // when task does return data
-                print(urlContent)
-                
-            } else {
-                
-                // When task does not return a data
-                
-            }
-            
-        }
-        task.resume()
-            
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier);
-        settingsBtn.action = "settingsAlert:";
+        // settingsBtn.action = "settingsAlert:";
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,15 +82,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell;
     }
     
-    func settingsAlert(sender: UIBarButtonItem) {
-        let settingsController = UIAlertController(title: "Settings", message: "Settings will be here", preferredStyle: .Alert)
-        let OKButtonAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            
-        }
-        settingsController.addAction(OKButtonAction);
-        self.presentViewController(settingsController, animated: true) {
-            
-        }
+//    func settingsAlert(sender: UIBarButtonItem) {
+//        let settingsController = UIAlertController(title: "Settings", message: "Settings will be here", preferredStyle: .Alert)
+//        let OKButtonAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+//            
+//        }
+//        settingsController.addAction(OKButtonAction);
+//        self.presentViewController(settingsController, animated: true) {
+//            
+//        }
+//    }
+    
+    @IBAction func exit(segue: UIStoryboardSegue) {
+        print("go back")
+        
     }
     
 }
