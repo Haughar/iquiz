@@ -9,6 +9,8 @@
 import Foundation
 
 class Quiz {
+    var title : String
+    var desc : String
     var questions : [String];
     var answers : [String];
     var fillers : [[String]];
@@ -18,7 +20,9 @@ class Quiz {
     var quizFinished : Bool;
     
     
-    init(questions: [String], answers: [String], fillers: [[String]]) {
+    init(title: String, desc: String, questions: [String], answers: [String], fillers: [[String]]) {
+        self.title = title
+        self.desc = desc
         self.questions = questions;
         self.answers = answers;
         self.fillers = fillers;

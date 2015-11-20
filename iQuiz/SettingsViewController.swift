@@ -7,12 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var urlInput: UITextField!
-    
-    var newQuiz = [AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +35,13 @@ class SettingsViewController: UIViewController {
         let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
-            let statusCode = (response as! NSHTTPURLResponse).statusCode
+            // let statusCode = (response as! NSHTTPURLResponse).statusCode
             
-            do {
-                
-                self.newQuiz = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! [AnyObject]
-                print("\(self.newQuiz)")
-                
-            } catch {
-                
-            }
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            
+            defaults.setObject(data, forKey: "quizData")
+            
         }
         
         task.resume()
